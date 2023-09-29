@@ -4,3 +4,6 @@
 [submodule "roles/win_explorer"]
 	path = roles/win_explorer
 	url = https://github.com/oxivanisher/role-win_explorer.git
+[submodule "roles/win_startmenu"]
+	path = roles/win_startmenu
+	url = https://github.com/oxivanisher/role-win_startmenu.git
