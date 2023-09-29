@@ -7,3 +7,6 @@
 [submodule "roles/win_startmenu"]
 	path = roles/win_startmenu
 	url = https://github.com/oxivanisher/role-win_startmenu.git
+[submodule "roles/win_taskbar"]
+	path = roles/win_taskbar
+	url = https://github.com/oxivanisher/role-win_taskbar.git
