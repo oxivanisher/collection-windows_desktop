@@ -11,7 +11,9 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
+      with:
+        submodules: true
 
     - name: Build Collection
       run: |
@@ -24,4 +26,3 @@ jobs:
       run: |
         ansible-galaxy collection publish --token $ANSIBLE_GALAXY_API_TOKEN *.tar.gz
       working-directory: ${{ github.workspace }}
-
