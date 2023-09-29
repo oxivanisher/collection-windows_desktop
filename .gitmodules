@@ -1,3 +1,6 @@
 [submodule "roles/win_debloat"]
 	path = roles/win_debloat
 	url = https://github.com/oxivanisher/role-win_debloat.git
+[submodule "roles/win_explorer"]
+	path = roles/win_explorer
+	url = https://github.com/oxivanisher/role-win_explorer.git
