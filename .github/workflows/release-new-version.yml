@@ -1,0 +1,116 @@
+name: Auto Release and Publish to Ansible Galaxy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_run:
+    workflows: ["Check for Version Change"]
+    types:
+      - completed
+
+jobs:
+  check_version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Update Submodules
+        run: |
+          git submodule update --init --recursive
+
+      - name: Check for Submodule Changes
+        id: submodule_changes
+        run: |
+          # Check if there are changes in submodules
+          if git diff --quiet --exit-code && git diff --quiet --exit-code --cached; then
+            echo "No submodule changes detected."
+            exit 0
+          fi
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Update submodules from workflow"
+          git push
+          echo "Submodule changes detected and pushed to repository."
+        continue-on-error: true
+
+      - name: Check for Version Change
+        id: version_change
+        run: |
+          # Get the current version in galaxy.yml
+          CURRENT_VERSION=$(grep -Eo 'version: [0-9]+\.[0-9]+\.[0-9]+' galaxy.yml | cut -d ' ' -f 2)
+
+          # Get the previous version in galaxy.yml from the last commit
+          PREVIOUS_VERSION=$(git log -1 --pretty=format:"%h" -- galaxy.yml~1)
+
+          # Check if the versions are different
+          if [ "$CURRENT_VERSION" != "$PREVIOUS_VERSION" ]; then
+            echo "Version change detected."
+          else
+            echo "No version change detected."
+            exit 0
+          fi
+        continue-on-error: true
+
+  create_release:
+    runs-on: ubuntu-latest
+    outputs:
+      my_output: ${{ steps.get_new_version.outputs.new_version }}
+    needs: check_version
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Get New Version
+        id: get_new_version
+        run: |
+          # Extract the new version from galaxy.yml
+          NEW_VERSION=$(grep -Eo 'version: [0-9]+\.[0-9]+\.[0-9]+' galaxy.yml | cut -d ' ' -f 2)
+          echo "New version: $NEW_VERSION"
+          echo "new_version=$NEW_VERSION" >> "$GITHUB_ENV"
+
+      - name: Get Submodule Commit Messages
+        if: env.new_version != ''
+        id: submodule_commit_messages
+        run: |
+          # Get the latest commit messages from all updated submodules
+          SUBMODULE_COMMIT_MESSAGES=$(git submodule foreach --quiet 'git log -1 --pretty=format:"%s"')
+          echo "submodule_commit_messages=$SUBMODULE_COMMIT_MESSAGES" >> "$GITHUB_ENV"
+
+      - name: Create Release on Github
+        id: release_created
+        if: env.new_version != ''
+        run: |
+          # Use the submodule commit messages as release notes
+          RELEASE_NOTES="Release notes for version $new_version:\n$SUBMODULE_COMMIT_MESSAGES"
+          echo "Release notes:"
+          echo "$RELEASE_NOTES"
+
+          # Create a new release using the GitHub API
+          RESULT=$(curl -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${{ github.repository }}/releases \
+            -d "{\"tag_name\":\"v$new_version\",\"name\":\"Release v$new_version\",\"body\":\"$RELEASE_NOTES\"}")
+
+      - name: Build ansible galaxy collection
+        if: env.new_version != ''
+        run: |
+          ansible-galaxy collection build .
+        working-directory: ${{ github.workspace }}
+
+      - name: Publish collection to Ansible Galaxy
+        if: env.new_version != ''
+        env:
+          ANSIBLE_GALAXY_API_TOKEN: ${{ secrets.ANSIBLE_GALAXY_API_TOKEN }}
+        run: |
+          ansible-galaxy collection publish --token $ANSIBLE_GALAXY_API_TOKEN *.tar.gz
+        working-directory: ${{ github.workspace }}
