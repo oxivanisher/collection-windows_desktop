@@ -1,6 +1,7 @@
 ## 2024-07-29
 * Remove more bloat from Windows systems
 * Update all windows roles to configure the ansible_user and Default
+* Add win_users role
 
 ## 2024-06-28
 * Adding supported minimal version for linter
