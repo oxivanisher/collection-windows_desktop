@@ -7,3 +7,4 @@
 * https://github.com/oxivanisher/role-win_explorer.git
 * https://github.com/oxivanisher/role-win_startmenu.git
 * https://github.com/oxivanisher/role-win_taskbar.git
+* https://github.com/oxivanisher/role-win_users.git
