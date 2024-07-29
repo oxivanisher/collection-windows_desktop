@@ -10,3 +10,6 @@
 [submodule "roles/win_taskbar"]
 	path = roles/win_taskbar
 	url = https://github.com/oxivanisher/role-win_taskbar.git
+[submodule "roles/win_users"]
+	path = roles/win_users
+	url = https://github.com/oxivanisher/role-win_users.git
