@@ -1,3 +1,6 @@
+## 2024-08-02
+* Bump win_startmenu role to also disable lockscreen stuff
+
 ## 2024-07-29
 * Remove more bloat from Windows systems
 * Update all windows roles to configure the ansible_user and Default
