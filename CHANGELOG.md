@@ -1,3 +1,6 @@
+## 2024-10-12 
+* Bump win_startmenu role to also disable Copilot
+
 ## 2024-08-02
 * Bump win_startmenu role to also disable lockscreen stuff
 
