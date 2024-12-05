@@ -1,4 +1,7 @@
-## 2024-10-12 
+## 2924-12-05
+* Bump for win_debloat since MS added stuff again
+
+## 2024-10-12
 * Bump win_startmenu role to also disable Copilot
 
 ## 2024-08-02
