@@ -1,3 +1,6 @@
+## 2025-01-01
+* Bump for win_taskbar role
+
 ## 2924-12-05
 * Bump for win_debloat since MS added stuff again
 
