@@ -1,3 +1,6 @@
+## 2025-01-15
+* Add role win_system and move some roles from other windows roles there
+
 ## 2025-01-01
 * Bump for win_taskbar role
 
