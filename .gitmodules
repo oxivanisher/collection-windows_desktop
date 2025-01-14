@@ -13,3 +13,6 @@
 [submodule "roles/win_users"]
 	path = roles/win_users
 	url = https://github.com/oxivanisher/role-win_users.git
+[submodule "roles/win_system"]
+	path = roles/win_system
+	url = https://github.com/oxivanisher/role-win_system.git
