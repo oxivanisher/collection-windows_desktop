@@ -1,3 +1,6 @@
+## 2025-01-23
+* Bump for win_explorer (remove onedrive personal from left pane)
+
 ## 2025-01-15
 * Bump for win_explorer (disable edit in notepad)
 
