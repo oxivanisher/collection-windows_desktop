@@ -1,3 +1,6 @@
+## 2025-01-25
+* Bump for win_explorer (remove onedrive personal from left pane fix)
+
 ## 2025-01-23
 * Bump for win_explorer (remove onedrive personal from left pane)
 
