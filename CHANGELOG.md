@@ -1,3 +1,6 @@
+## 2025-02-08
+* Bump for all roles to remove unused tests directory to make linter happy
+
 ## 2025-01-25
 * Bump for win_explorer (remove onedrive personal from left pane fix)
 
