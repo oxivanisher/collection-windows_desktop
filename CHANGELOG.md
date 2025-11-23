@@ -1,3 +1,6 @@
+## 2025-11-23
+* Ansible 2.5 porting in all roles
+
 ## 2025-09-15
 * Bump for win_debloat and try to remove StartExperiencesApp
 
