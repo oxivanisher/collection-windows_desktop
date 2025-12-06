@@ -1,3 +1,6 @@
+## 2025-12-06
+* Bump for windows_debloat to also wipe edge game helper
+
 ## 2025-11-23
 * Ansible 2.5 porting in all roles
 
