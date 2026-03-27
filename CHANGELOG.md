@@ -1,3 +1,6 @@
+## 2026-03-27
+* Bump for optimized loop output
+
 ## 2025-12-06
 * Bump for windows_debloat to also wipe edge game helper
 
