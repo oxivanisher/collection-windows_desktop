@@ -1,3 +1,6 @@
+## 2026-04-01
+* win_users: add no_log to user creation task
+
 ## 2026-03-27
 * Bump for optimized loop output
 
