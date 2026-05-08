@@ -1,3 +1,6 @@
+## 2026-05-08
+* Bump for github.com workflow action version upgrade
+
 ## 2026-04-01
 * win_users: add no_log to user creation task
 
