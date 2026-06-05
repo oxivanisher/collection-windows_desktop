@@ -1,3 +1,6 @@
+## 2026-06-05
+* Bump for win_debloat ... No, microsoft I DON'T WANT COPILOT!
+
 ## 2026-05-08
 * Bump for github.com workflow action version upgrade
 
